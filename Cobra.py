@@ -1,20 +1,10 @@
 #
 # Programa simples que orienta movimento da cobra segundo as teclas de setas
 #
-
-from turtle import *
-from time import sleep
+from turtle import Turtle
 
 
 class Cobra(Turtle):
-
-    # Move para frente
-
-    def movimento(self):
-
-        while True:
-            t.forward(5)
-            sleep(0.5)
 
     # Aponta para cima
 
@@ -43,6 +33,8 @@ class Cobra(Turtle):
     # Muda design da cabeça da cobra
 
     def cabeca(self):
+        t.setpos(0, 0)
+        t.showturtle()
         t.speed(0)
         t.shape("square")
         t.color("black")
@@ -54,6 +46,8 @@ class Cobra(Turtle):
 #
 
 t = Cobra()
+t.hideturtle()
+
 s = t.getscreen()
 
 s.onkey(t.cima,     "Up")
@@ -62,5 +56,5 @@ s.onkey(t.esquerda, "Left")
 s.onkey(t.direita,  "Right")
 
 s.listen()
+
 t.cabeca()
-t.movimento()

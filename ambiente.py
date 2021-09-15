@@ -1,14 +1,24 @@
-#
-# programa que simula o ambiente do jogo
-#
 import turtle
-import time
 
-def ambiente():
-        self = turtle.Screen()
-        self.title("Snake Game")
-        self.bgcolor("blue")
-        self.setup(width = 600, heigth = 600)
-        self.tracer(0)
 
-ambiente()
+class Ambiente():
+    def background(self):
+        b = turtle.Screen()
+        b.title("Snake Game")
+        b.bgcolor("blue")
+        b.setup(width=600, height=600)
+
+    def score(self, score, highScore):
+        pen = turtle.Turtle()
+        pen.hideturtle()
+        pen.speed(0)
+        pen.shape("circle")
+        pen.color("black")
+        pen.penup()
+        pen.goto(0, 225)
+        pen.write(f"Score: {score} High Score: {highScore}", align="center",
+                  font=("Arial", 24, "normal"))
+
+
+Ambiente().background()
+Ambiente().score(0, 0)
