@@ -34,17 +34,16 @@ class Cobra(Turtle):
 
     def cabeca(self):
         t.setpos(0, 0)
-        t.showturtle()
         t.speed(0)
         t.shape("square")
-        t.color("black")
+        t.color("green")
         t.penup()
+        t.showturtle()
 
 
 #
 # Registra as teclas e inicia movimento
 #
-
 t = Cobra()
 t.hideturtle()
 

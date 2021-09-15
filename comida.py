@@ -10,7 +10,7 @@ class Comida():
         turtle.penup()
         turtle.shapesize(stretch_len=0.5, stretch_wid=0.5)
         turtle.color("red")
-        turtle.goto(randrange(-280, 280, 20), randrange(-280, 280, 20))
+        turtle.goto(randrange(-220, 220, 20), randrange(-220, 220, 20))
         turtle.showturtle()
         comidaPos = turtle.pos()
 
