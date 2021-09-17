@@ -1,6 +1,5 @@
 import csv
-import math
-from os import O_APPEND
+from time import sleep
 
 
 class Funcoes():
@@ -31,14 +30,15 @@ class Funcoes():
 
                     return lista
 
-    def calculaDiferenca(self, eixo, posCobra, posComida):
 
-        valor = 0
+class Fim:
+    def finalizarJogo(self, scores, highScores, filePath):
 
-        if eixo == "x":
-            valor = 0
+        for score in scores:
+            highScores.append(score)
 
-        elif eixo == "y":
-            valor = 1
+        highScores = Funcoes().removeRepetido(highScores)
 
-        return math.floor(abs(posCobra[valor]))-math.floor(abs(posComida[valor]))
+        Funcoes().manipulaCsv('w', filePath, highScores)
+
+        sleep(3)

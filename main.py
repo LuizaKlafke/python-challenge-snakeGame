@@ -3,14 +3,15 @@ from comida import *
 from cobra import *
 from funcoes import *
 from time import sleep
-import math
 import os
 import os.path
 
+cobra = []
 scores = []
 score = 0
 highScores = [0, ]
 filePath = 'scores.csv'
+
 
 if os.path.exists(filePath):
     Funcoes().manipulaCsv('r', filePath, highScores)
@@ -19,25 +20,34 @@ else:
     Funcoes().manipulaCsv('w', filePath, highScores)
 
 highScore = max(highScores)
-
+Ambiente()
 Ambiente().score(score, highScore)
-comidaPos = Comida().novaComida()
+cobra.append(Cobra().criaCabeca())
+Comida().novaComida()
+
+comidaPos = comida.pos()
 
 while True:
-    cobraPos = t.pos()
-    sleep(0.5)
-    t.forward(20)
+    cobraPos = cabeca.pos()
+    sleep(0.1)
+    Cobra().moveCauda(cobra)
+    cabeca.forward(20)
 
-    diferencaPosX = Funcoes().calculaDiferenca('x', cobraPos, comidaPos)
-    diferencaPosY = Funcoes().calculaDiferenca('y', cobraPos, comidaPos)
+    for i in cobra:
+        if 0 < i.distance(cabeca) < 10:
+            Ambiente().gameOver(scores, highScores, filePath)
 
-    cobraPosX = math.floor(abs(cobraPos[0]))
-    cobraPosY = math.floor(abs(cobraPos[1]))
+            break
 
-    if -10 < diferencaPosX < 10 and -10 < diferencaPosY < 10:
-        comidaPos = Comida().novaComida()
+    cobraPosX = abs(cabeca.xcor())
+    cobraPosY = abs(cabeca.ycor())
+
+    if cabeca.distance(comida) < 10:
+        comidaPos = comida.pos()
+        Comida().mudarPos()
         score += 20
         scores.append(score)
+        Cobra().criaCauda(cobra)
 
         if highScore < score:
             highScore = score
@@ -45,14 +55,6 @@ while True:
         Ambiente().incScore(score, highScore)
 
     elif cobraPosX > 230 or cobraPosY > 230:
-        Ambiente().gameOver()
+        Ambiente().gameOver(scores, highScores, filePath)
 
-        for score in scores:
-            highScores.append(score)
-
-        highScores = Funcoes().removeRepetido(highScores)
-
-        Funcoes().manipulaCsv('w', filePath, highScores)
-
-        sleep(5)
         break

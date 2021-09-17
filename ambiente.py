@@ -1,8 +1,9 @@
 import turtle
+from funcoes import Fim
 
 
 class Ambiente():
-    def background(self):
+    def __init__(self):
         b = turtle.Screen()
         b.title("Snake Game")
         b.bgcolor("blue")
@@ -39,12 +40,12 @@ class Ambiente():
         pen.clear()
         Ambiente().updateScore(score, highScore)
 
-    def gameOver(self):
+    def gameOver(self, score, highScore, filePath):
         pen.clear()
         pen.goto(0, 0)
         pen.write("Game over", align="center", font=("Arial", 30, "normal"))
+        Fim().finalizarJogo(score, highScore, filePath)
 
 
 pen = turtle.Turtle()
 pen.hideturtle()
-Ambiente().background()
