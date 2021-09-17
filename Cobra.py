@@ -1,36 +1,27 @@
 #
-# Programa simples que orienta movimento da cobra segundo as teclas de setas
+# Programa que define os atributos do objeto cobra do jogo.
 #
+
 from turtle import Turtle
 
 
-class Cobra(Turtle):
-
-    # Aponta para cima
+class Cobra():
 
     def cima(self):
 
         return cabeca.setheading(90)
 
-    # Aponta para baixo
-
     def baixo(self):
 
         return cabeca.setheading(270)
-
-    # Aponta para a esquerda
 
     def esquerda(self):
 
         return cabeca.setheading(180)
 
-    # Aponta para a direita
-
     def direita(self):
 
         return cabeca.setheading(0)
-
-    # Muda design da cabeça da cobra
 
     def criaCabeca(self):
         cabeca.setpos(0, 0)
@@ -42,35 +33,42 @@ class Cobra(Turtle):
 
         return cabeca
 
-    def criaCauda(self, cobra):
+    def criaCauda(self, segmentos):
         cauda = Turtle("square")
         cauda.hideturtle()
         cauda.speed(0)
         cauda.penup()
         cauda.color("green")
-        cauda.setpos(cobra[-1].position())
-        cobra.append(cauda)
+        segmentos.append(cauda)
+        cauda.goto(cabeca.pos())
         cauda.showturtle()
 
-    def moveCauda(self, cobra):
-        for i in range(len(cobra) - 1, 0, -1):
-            posX = cobra[i - 1].xcor()
-            posY = cobra[i - 1].ycor()
-            cobra[i].goto(posX, posY)
+    # Define movimento da cauda da cobra de acordo com posição das tartarugas.
+    def moveCauda(self, segmentos):
+        for i in range(len(segmentos)-1, 0, -1):
+
+            posX = segmentos[i-1].xcor()
+            posY = segmentos[i-1].ycor()
+            segmentos[i].goto(posX, posY)
+
+        if len(segmentos) > 0:
+            x = cabeca.xcor()
+            y = cabeca.ycor()
+            segmentos[0].goto(x, y)
 
 
 #
-# Registra as teclas e inicia movimento
+# Registra o movimento à partir das teclas.
 #
-cabeca = Cobra()
+
+cabeca = Turtle()
 cabeca.hideturtle()
 
 s = cabeca.getscreen()
 
-s.onkey(cabeca.cima,     "Up")
-s.onkey(cabeca.baixo,    "Down")
-s.onkey(cabeca.esquerda, "Left")
-s.onkey(cabeca.direita,  "Right")
+s.onkey(Cobra().cima,     "Up")
+s.onkey(Cobra().baixo,    "Down")
+s.onkey(Cobra().esquerda, "Left")
+s.onkey(Cobra().direita,  "Right")
 
 s.listen()
-cabeca.criaCabeca()

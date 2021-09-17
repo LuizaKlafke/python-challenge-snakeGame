@@ -1,8 +1,14 @@
+#
+# Programa que define os atributos do objeto ambiente do jogo.
+#
+
+from time import sleep
 import turtle
-from funcoes import Fim
 
 
 class Ambiente():
+
+    # Cria background do jogo.
     def __init__(self):
         b = turtle.Screen()
         b.title("Snake Game")
@@ -40,11 +46,16 @@ class Ambiente():
         pen.clear()
         Ambiente().updateScore(score, highScore)
 
-    def gameOver(self, score, highScore, filePath):
-        pen.clear()
+    def gameOver(self, cabeca, segmentos, comida):
         pen.goto(0, 0)
         pen.write("Game over", align="center", font=("Arial", 30, "normal"))
-        Fim().finalizarJogo(score, highScore, filePath)
+
+        cabeca.hideturtle()
+        comida.hideturtle()
+        for i in segmentos:
+            i.hideturtle()
+
+        sleep(3)
 
 
 pen = turtle.Turtle()

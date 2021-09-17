@@ -1,3 +1,7 @@
+#
+# Define os atributos do objeto comida do jogo.
+#
+
 from random import randrange
 import turtle
 
@@ -11,6 +15,8 @@ class Comida():
         comida.color("red")
         comida.goto(randrange(-220, 220, 20), randrange(-220, 220, 20))
         comida.showturtle()
+
+        return comida
 
     def mudarPos(self):
         comida.hideturtle()
