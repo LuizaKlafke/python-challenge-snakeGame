@@ -1,6 +1,6 @@
 #
 # Programa que simula o jogo da cobrinha.
-# Todos os direitos reservados à Luiza Klafke e Kesya Lopes.
+# Todos os direitos reservados à Luiza Klafke.
 #
 
 from ambiente import *
